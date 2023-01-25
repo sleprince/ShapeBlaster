@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private int spawnInterval = 1;
     [SerializeField] private Camera mainCam;
     [SerializeField] private GameObject newParent;
-    [SerializeField] private GameObject exampleSpawn;
+    [SerializeField] private GameObject screenCollider;
     
     //need max objects allowed to spawn per level
     
@@ -63,8 +63,13 @@ public class GameManager : MonoBehaviour
             */
             
             //Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, Screen.height/2, Camera.main.nearClipPlane+5)); //will get the middle of the screen
- 
-            Vector3 screenPosition = new Vector3(Random.Range(-10,10), Random.Range(-6,6), 0.1f);
+
+            Collider screen = screenCollider.GetComponentInChildren<Collider>();
+            Vector3 screenBounds = screen.bounds.size;
+            
+            //Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0,Screen.width), Random.Range(0,Screen.height), Camera.main.farClipPlane/2));
+            
+            Vector3 screenPosition = new Vector3(Random.Range(-9,9), Random.Range(-5,5), 0.1f);
  
             float spawnZ = 0.1f;
             
