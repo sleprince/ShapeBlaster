@@ -603,11 +603,36 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2720487061362106953, guid: b1e3fbf2b91dc5d419302dc910a763ef, type: 3}
   m_PrefabInstance: {fileID: 2720487062958451782}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2035321658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 683186875033557606, guid: 570804da2285e59438dc5fa66648ec0c, type: 3}
+  m_PrefabInstance: {fileID: 683186874080366940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2035321659 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 683186875033557607, guid: 570804da2285e59438dc5fa66648ec0c, type: 3}
   m_PrefabInstance: {fileID: 683186874080366940}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &2035321663
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035321658}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1094a18b462cc284696de9d037f056d3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!224 &2047344867 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 10775663766855544, guid: 4789ff4aa8f589e41b56e264818da098, type: 3}
@@ -707,6 +732,10 @@ PrefabInstance:
     - target: {fileID: 10775663766855545, guid: 4789ff4aa8f589e41b56e264818da098, type: 3}
       propertyPath: m_Name
       value: Cylinder
+      objectReference: {fileID: 0}
+    - target: {fileID: 10775663766855545, guid: 4789ff4aa8f589e41b56e264818da098, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4789ff4aa8f589e41b56e264818da098, type: 3}
@@ -818,6 +847,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Capsule
       objectReference: {fileID: 0}
+    - target: {fileID: 1379771525720241619, guid: f3feea84d86292b42989b9b81739c658, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1379771525720241620, guid: f3feea84d86292b42989b9b81739c658, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -914,6 +947,10 @@ PrefabInstance:
     - target: {fileID: 2720487061362106952, guid: b1e3fbf2b91dc5d419302dc910a763ef, type: 3}
       propertyPath: m_Name
       value: Log
+      objectReference: {fileID: 0}
+    - target: {fileID: 2720487061362106952, guid: b1e3fbf2b91dc5d419302dc910a763ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2720487061362106953, guid: b1e3fbf2b91dc5d419302dc910a763ef, type: 3}
       propertyPath: m_Pivot.x
@@ -1095,6 +1132,10 @@ PrefabInstance:
     - target: {fileID: 4989098814792489710, guid: a8a9caa510b567c4aa5f0c43d19ff4fe, type: 3}
       propertyPath: m_Name
       value: Sphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 4989098814792489710, guid: a8a9caa510b567c4aa5f0c43d19ff4fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8a9caa510b567c4aa5f0c43d19ff4fe, type: 3}
