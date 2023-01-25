@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviour
             GameObject newObject = Instantiate(Resources.Load(Path.Combine("itemPrefabs", "item" + id)), spawnPos,
                 Quaternion.identity) as GameObject;
             
-            newObject.transform.SetParent(newParent.transform);
-            //newObject.transform.localScale = exampleSpawn.transform.localScale; //stop it being giant
+            //newObject.transform.SetParent(newParent.transform);
+            
 
             // Instantiate(yourObject, this.transform, worldPositionStays:false);
             //need to make it instantiate as child of GameCanvas/Items
@@ -55,17 +55,24 @@ public class GameManager : MonoBehaviour
     {
         //for (int i = 0; i < 10; i++)
         //{
-            float spawnY = Random.Range
+            /*float spawnY = Random.Range
                 (mainCam.ScreenToWorldPoint(new Vector3(0, 0)).y, mainCam.ScreenToWorldPoint(new Vector3(0, Screen.height)).y);
             float spawnX = Random.Range
                 (mainCam.ScreenToWorldPoint(new Vector3(0, 0)).x, mainCam.ScreenToWorldPoint(new Vector3(Screen.width, 0)).x);
             float spawnZ = 0.1f;
- 
-
+            */
             
-        //}
-        Vector3 spawnPosition = new Vector3(spawnX, spawnY, spawnZ);
-        return spawnPosition;
+            //Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, Screen.height/2, Camera.main.nearClipPlane+5)); //will get the middle of the screen
+ 
+            Vector3 screenPosition = new Vector3(Random.Range(-10,10), Random.Range(-6,6), 0.1f);
+ 
+            float spawnZ = 0.1f;
+            
+
+        Vector3 spawnPosition = new Vector3(screenPosition.x, screenPosition.y, spawnZ);
+        
+        return screenPosition;
+        //return spawnPosition;
     }
 
     void itemMovement()
