@@ -5,8 +5,11 @@ using System.IO; //to use path.combine
 
 public class GameManager : MonoBehaviour
 {
-    protected float gameTimer;
+    //protected float gameTimer;
+    public float gameTimer;
     private int spawnInterval = 1;
+    [SerializeField] bool continueSpawning = true;
+    
     [SerializeField] private Camera mainCam;
     [SerializeField] private GameObject newParent;
     [SerializeField] private GameObject screenCollider;
@@ -16,7 +19,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        InvokeRepeating("SpawnShape", 1f, 1f);
     }
 
     // Update is called once per frame
@@ -24,13 +27,24 @@ public class GameManager : MonoBehaviour
     {
         gameTimer += Time.deltaTime;
         
-        if (gameTimer >= spawnInterval)
+
+
+
+
+    }
+
+    void SpawnShape()
+    {
+
+        if (continueSpawning)  //for debugging
+            //if (gameTimer >= spawnInterval
+            
         {
             int id = Random.Range(1, 4);
             //need to create random vector 3 for the position within the bounds of the canvas
             //need to instantiate automatically a certain amount of objects that differs per level
             
-            gameTimer = 0f;
+            //gameTimer = 0f;
 
             Vector3 spawnPos = RandomSpawnPosition();
             
@@ -43,12 +57,15 @@ public class GameManager : MonoBehaviour
 
             // Instantiate(yourObject, this.transform, worldPositionStays:false);
             //need to make it instantiate as child of GameCanvas/Items
+            
         }
+        
+      
         //newObject.transform.SetParent(newParent.transform)
         
         //spawnPos
         
-        
+
     }
 
     Vector3 RandomSpawnPosition()

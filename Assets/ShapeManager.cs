@@ -11,7 +11,10 @@ public class ShapeManager : MonoBehaviour
     private float moveForce = 2.0f;
 
     private Rigidbody rb;
-    private int clickForce = 2500;
+    private float forceReducer = 100000000; //value could be decreased, as a powerup
+    
+    //private float forceAdder = 2.0f;
+    
     private Plane plane = new Plane(Vector3.up, Vector3.zero);
     
     float mainSpeed = 100.0f; //regular speed
@@ -28,6 +31,10 @@ public class ShapeManager : MonoBehaviour
     {
         rBody = GetComponent<Rigidbody>();
         shapeController = GetComponent<CharacterController>();
+
+        rBody.mass =+ forceReducer;
+        rBody.angularDrag =+ forceReducer;
+        rBody.drag =+ forceReducer;
 
     }
 
@@ -57,6 +64,8 @@ public class ShapeManager : MonoBehaviour
         lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x, transform.eulerAngles.y + lastMouse.y, 0);
         transform.eulerAngles = lastMouse;
         lastMouse = Input.mousePosition;
+
+        Vector3 minusForce = new Vector3(-2500,-2500,-2500);
         
         //if (Input.GetMouseButtonDown(0)) //if lmb pressed
             rBody.AddRelativeForce(shapeController.transform.forward, ForceMode.Impulse); //(lastMouse.normalized * moveForce, ForceMode.Impulse);
