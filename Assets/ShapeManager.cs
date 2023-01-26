@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ShapeManager : MonoBehaviour
@@ -13,17 +14,20 @@ public class ShapeManager : MonoBehaviour
 
     private Rigidbody rb;
 
-    
+
     //private float forceAdder = 2.0f;
-    
+
     private Plane plane = new Plane(Vector3.up, Vector3.zero);
-    
+
     float mainSpeed = 100.0f; //regular speed
     float shiftAdd = 250.0f; //multiplied by how long shift is held.  Basically running
     float maxShift = 1000.0f; //Maximum speed when holdin gshift
     float camSens = 0.25f; //How sensitive it with mouse
-    private Vector3 lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
-    private float totalRun= 1.0f;
+
+    private Vector3
+        lastMouse = new Vector3(255, 255, 255); //kind of in the middle of the screen, rather than at the top (play)
+
+    private float totalRun = 1.0f;
 
 
 
@@ -51,26 +55,27 @@ public class ShapeManager : MonoBehaviour
     {
 
         Debug.Log("you clicked on" + this);
-        
+
 
         //transform.gameObject.SetActive(false);
-        
+
 
 
         Vector3 forceDirection = new Vector3(0, 0, 10);
-        
+
         lastMouse = Input.mousePosition - lastMouse;
         lastMouse = new Vector3(-lastMouse.y * camSens, lastMouse.x * camSens, 0);
         lastMouse = new Vector3(transform.eulerAngles.x + lastMouse.x, transform.eulerAngles.y + lastMouse.y, 0);
         transform.eulerAngles = lastMouse;
         lastMouse = Input.mousePosition;
 
-        Vector3 minusForce = new Vector3(-2500,-2500,-2500);
-        
-        //if (Input.GetMouseButtonDown(0)) //if lmb pressed
-            rBody.AddRelativeForce(shapeController.transform.forward, ForceMode.Impulse); //(lastMouse.normalized * moveForce, ForceMode.Impulse);
+        Vector3 minusForce = new Vector3(-2500, -2500, -2500);
 
-        
+        //if (Input.GetMouseButtonDown(0)) //if lmb pressed
+        rBody.AddRelativeForce(shapeController.transform.forward,
+            ForceMode.Impulse); //(lastMouse.normalized * moveForce, ForceMode.Impulse);
+
+
     }
 
 
@@ -97,13 +102,25 @@ public class ShapeManager : MonoBehaviour
         }
         */
 
+    void OnCollisionEnter(Collision collision)
 
-        void OnCollisionEnter(Collision collision)
+    {
+        //check if the other collider#s mesh material is the same shape
+        if (collision.gameObject.CompareTag("Shape") && collision.contactCount > 1) //without this they always collide immediately.
         {
-            //check if the other collider#s mesh material is the same shape
-            //if so deactivate both objects
-            //score ++, score different for different shapes. scriptable object database, shape prefab, score, spawn frequency.
+            
+            collision.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+            gManager.score += 100; //could do times a multiplier per different shape, set in a database.
+            gManager.scoreText.text = "SCORE: " + gManager.score;
+
         }
+
+    }
+
+//if so deactivate both objects
+            //score ++, score different for different shapes. scriptable object database, shape prefab, score, spawn frequency.
+
 
     
 }

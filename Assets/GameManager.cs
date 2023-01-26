@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
-using UnityEngine.UI; //to use path.combine
+using System.IO; //to use path.combine
+using UnityEngine.UI; 
 
 public class GameManager : MonoBehaviour
 {
     //protected float gameTimer;
     public float gameTimer;
-    private int spawnInterval = 1;
+    public float score;
+    public float spawnInterval {get; set;}
     [SerializeField] bool continueSpawning = true;
     
     [SerializeField] private Camera mainCam;
     [SerializeField] private GameObject newParent;
     [SerializeField] private GameObject screenCollider;
+
+    [SerializeField] public TMPro.TextMeshProUGUI scoreText;
     
     public float forceReducer {get; set;} //value could be decreased, as a powerup
     
@@ -23,7 +26,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         forceReducer = 100;
-        InvokeRepeating("SpawnShape", 1f, 1f);
+        spawnInterval = 1.0f;
+        InvokeRepeating("SpawnShape", spawnInterval, spawnInterval);
     }
 
     // Update is called once per frame
