@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class ShapeManager : MonoBehaviour
 {
+    private GameManager gManager;
     Rigidbody rBody;
     private CharacterController shapeController;
 
     private float moveForce = 2.0f;
 
     private Rigidbody rb;
-    private float forceReducer = 100000000; //value could be decreased, as a powerup
+
     
     //private float forceAdder = 2.0f;
     
@@ -31,19 +32,18 @@ public class ShapeManager : MonoBehaviour
     {
         rBody = GetComponent<Rigidbody>();
         shapeController = GetComponent<CharacterController>();
+        gManager = GetComponentInParent<GameManager>();
 
-        rBody.mass =+ forceReducer;
-        rBody.angularDrag =+ forceReducer;
-        rBody.drag =+ forceReducer;
+
 
     }
 
     // Update is called once per custom
     void Update()
     {
-        
-
-        //Mouse  camera angle done.  
+        rBody.mass = gManager.forceReducer + 1; //could have a scriptable object database of shape weights instead of 1.
+        rBody.angularDrag = gManager.forceReducer + 0.05f;
+        rBody.drag = gManager.forceReducer + 0;
 
     }
 

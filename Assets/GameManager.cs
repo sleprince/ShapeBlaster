@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject newParent;
     [SerializeField] private GameObject screenCollider;
     
+    public float forceReducer = 100000000; //value could be decreased, as a powerup
+    
     //need max objects allowed to spawn per level
     
     // Start is called before the first frame update
@@ -52,7 +54,7 @@ public class GameManager : MonoBehaviour
             GameObject newObject = Instantiate(Resources.Load(Path.Combine("itemPrefabs", "item" + id)), spawnPos,
                 Quaternion.identity) as GameObject;
             
-            //newObject.transform.SetParent(newParent.transform);
+            newObject.transform.SetParent(newParent.transform);
             
 
             // Instantiate(yourObject, this.transform, worldPositionStays:false);
@@ -100,6 +102,18 @@ public class GameManager : MonoBehaviour
     void itemMovement()
     {
         //setup random movement direction within bounds of the screen, check 2d platformer for code inspiration
+    }
+
+    public void ZeroGravity()
+    {
+
+        if (forceReducer != 0)
+            forceReducer = 0;
+        else
+        {
+            forceReducer = 100000000;
+        }
+
     }
     
 }
