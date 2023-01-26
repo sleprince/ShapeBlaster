@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO; //to use path.combine
+using System.IO;
+using UnityEngine.UI; //to use path.combine
 
 public class GameManager : MonoBehaviour
 {
@@ -14,13 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject newParent;
     [SerializeField] private GameObject screenCollider;
     
-    public float forceReducer = 100000000; //value could be decreased, as a powerup
+    public float forceReducer {get; set;} //value could be decreased, as a powerup
     
     //need max objects allowed to spawn per level
     
     // Start is called before the first frame update
     void Start()
     {
+        forceReducer = 100;
         InvokeRepeating("SpawnShape", 1f, 1f);
     }
 
@@ -111,9 +113,11 @@ public class GameManager : MonoBehaviour
             forceReducer = 0;
         else
         {
-            forceReducer = 100000000;
+            forceReducer = 100;
         }
 
     }
+
+
     
 }
