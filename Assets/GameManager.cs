@@ -27,7 +27,9 @@ public class GameManager : MonoBehaviour
     {
         forceReducer = 100;
         spawnInterval = 1.0f;
-        InvokeRepeating("SpawnShape", spawnInterval, spawnInterval);
+        //InvokeRepeating("SpawnShape", spawnInterval, spawnInterval);
+        //change to coroutine, more optimised.
+        StartCoroutine("SpawnShape");
     }
 
     // Update is called once per frame
@@ -41,12 +43,9 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void SpawnShape()
+    IEnumerator SpawnShape()
     {
-
-        if (continueSpawning)  //for debugging
-            //if (gameTimer >= spawnInterval
-            
+        while(continueSpawning)
         {
             int id = Random.Range(1, 4);
             //need to create random vector 3 for the position within the bounds of the canvas
@@ -59,14 +58,17 @@ public class GameManager : MonoBehaviour
             // For every spawnInterval or "second" it will spawn an item
             GameObject newObject = Instantiate(Resources.Load(Path.Combine("itemPrefabs", "item" + id)), spawnPos,
                 Quaternion.identity) as GameObject;
+
+            
+            newObject.name = "Shape" + gameTimer;
+
+            Physics.IgnoreCollision(newObject.GetComponent<Collider>(), newObject.GetComponent<Collider>()); //ignore collisions with itself
             
             newObject.transform.SetParent(newParent.transform);
-            
 
-            // Instantiate(yourObject, this.transform, worldPositionStays:false);
-            //need to make it instantiate as child of GameCanvas/Items
-            
+            yield return new WaitForSeconds(spawnInterval);
         }
+
         
       
         //newObject.transform.SetParent(newParent.transform)

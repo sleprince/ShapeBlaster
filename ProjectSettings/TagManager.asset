@@ -12,10 +12,10 @@ TagManager:
   - Shapes
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Square
+  - Capsule
+  - Cylinder
+  - Sphere
   - 
   - 
   - 

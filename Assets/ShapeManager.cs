@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ShapeManager : MonoBehaviour
@@ -105,14 +104,26 @@ public class ShapeManager : MonoBehaviour
     void OnCollisionEnter(Collision collision)
 
     {
+        
+       
+        
+        //if spawns next to another object, transport to a new spawn point.
+        //collision.gameObject.CompareTag("Shape") && collision.contactCount > 1 &&& collision.gameObject.layer == gameObject.layer
+
+        
         //check if the other collider#s mesh material is the same shape
-        if (collision.gameObject.CompareTag("Shape") && collision.contactCount > 1) //without this they always collide immediately.
+        if (collision.collider != this.GetComponent<Collider>() && name != collision.gameObject.name
+            && collision.gameObject.layer == gameObject.layer && collision.contactCount > 1) //without the name one they always collide immediately with themselves.
         {
             
-            collision.gameObject.SetActive(false);
-            gameObject.SetActive(false);
-            gManager.score += 100; //could do times a multiplier per different shape, set in a database.
-            gManager.scoreText.text = "SCORE: " + gManager.score;
+            Debug.Log(name + " colliided with " + collision.gameObject.name);
+//layers.
+
+                collision.gameObject.SetActive(false);
+                gameObject.SetActive(false);
+                gManager.score += 100; //could do times a multiplier per different shape, set in a database.
+                gManager.scoreText.text = "SCORE: " + gManager.score;
+            
 
         }
 
