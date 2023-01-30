@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera mainCam;
     [SerializeField] private GameObject newParent;
     [SerializeField] private GameObject screenCollider;
+    private int shapeID = 0;
 
     [SerializeField] public TMPro.TextMeshProUGUI scoreText;
     
@@ -60,7 +61,8 @@ public class GameManager : MonoBehaviour
                 Quaternion.identity) as GameObject;
 
             
-            newObject.name = "Shape" + gameTimer;
+            newObject.name = "Shape" + shapeID;
+            shapeID++;
 
             Physics.IgnoreCollision(newObject.GetComponent<Collider>(), newObject.GetComponent<Collider>()); //ignore collisions with itself
             
