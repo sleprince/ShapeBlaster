@@ -1,7 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO; //to use path.combine
 
 public class ShapeManager : MonoBehaviour
 {
@@ -113,7 +113,7 @@ public class ShapeManager : MonoBehaviour
         
         //check if the other collider#s mesh material is the same shape
         if (collision.collider != this.GetComponent<Collider>() && name != collision.gameObject.name
-            && collision.gameObject.layer == gameObject.layer && collision.contactCount > 1) //without the name one they always collide immediately with themselves.
+            && collision.gameObject.layer == gameObject.layer) //without the name one they always collide immediately with themselves.
         {
             
             Debug.Log(name + " colliided with " + collision.gameObject.name);
@@ -123,7 +123,11 @@ public class ShapeManager : MonoBehaviour
                 gameObject.SetActive(false);
                 gManager.score += 100; //could do times a multiplier per different shape, set in a database.
                 gManager.scoreText.text = "SCORE: " + gManager.score;
-            
+                
+                int id = Random.Range(1, 5);
+                gManager.GetComponent<AudioSource>().clip = Resources.Load(Path.Combine("Sounds", "Sound " + id)) as AudioClip;
+                gManager.GetComponent<AudioSource>().Play();
+
 
         }
 
