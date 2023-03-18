@@ -16,11 +16,24 @@ public class GameManager : MonoBehaviour
     private int shapeID = 0;
 
     [SerializeField] public TMPro.TextMeshProUGUI scoreText;
-    
+
+    public static GameManager instance;
+
     public float forceReducer {get; set;} //value could be decreased, as a powerup
-    
+
     //need max objects allowed to spawn per level
-    
+
+    public static GameManager GetInstance()
+    {
+        return instance;
+    }
+
+    void Awake()
+    {
+        instance = this;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
