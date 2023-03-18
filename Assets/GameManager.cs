@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO; //to use path.combine
-using UnityEngine.UI; 
 
 public class GameManager : MonoBehaviour
 {
@@ -29,7 +27,7 @@ public class GameManager : MonoBehaviour
         forceReducer = 100;
         spawnInterval = 1.0f;
         //InvokeRepeating("SpawnShape", spawnInterval, spawnInterval);
-        //change to coroutine, more optimised.
+        //changed to coroutine, more optimised.
         StartCoroutine("SpawnShape");
     }
 
@@ -37,81 +35,51 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         gameTimer += Time.deltaTime;
-        
-
-
-
 
     }
 
     IEnumerator SpawnShape()
     {
-        while(continueSpawning)
+        yield return new WaitForSeconds(1); //give it time to create the object pool first
+
+        while (continueSpawning)
         {
             int id = Random.Range(1, 4);
             //need to create random vector 3 for the position within the bounds of the canvas
-            //need to instantiate automatically a certain amount of objects that differs per level
-            
-            //gameTimer = 0f;
+            //need to instantiate automatically a certain amount of objects that differs per level   
 
             Vector3 spawnPos = RandomSpawnPosition();
-            
+
             // For every spawnInterval or "second" it will spawn an item
-            GameObject newObject = Instantiate(Resources.Load(Path.Combine("itemPrefabs", "item" + id)), spawnPos,
-                Quaternion.identity) as GameObject;
+            GameObject newObject = Pool.singleton.Get("item" + id + "(Clone)");
+            newObject.SetActive(true);
 
-            
-            newObject.name = "Shape" + shapeID;
-            shapeID++;
+            if (newObject != null)
+            {
+                newObject.transform.position = spawnPos;
 
-            Physics.IgnoreCollision(newObject.GetComponent<Collider>(), newObject.GetComponent<Collider>()); //ignore collisions with itself
-            
-            newObject.transform.SetParent(newParent.transform);
+
+                //newObject.name = "Shape" + shapeID; //depricated
+                //shapeID++;
+
+                Physics.IgnoreCollision(newObject.GetComponent<Collider>(), newObject.GetComponent<Collider>()); //ignore collisions with itself
+
+                //newObject.transform.SetParent(newParent.transform); //depricated
+            }
 
             yield return new WaitForSeconds(spawnInterval);
         }
-
-        
-      
-        //newObject.transform.SetParent(newParent.transform)
-        
-        //spawnPos
-        
-
     }
 
     Vector3 RandomSpawnPosition()
-    {
-        //for (int i = 0; i < 10; i++)
-        //{
-            /*float spawnY = Random.Range
-                (mainCam.ScreenToWorldPoint(new Vector3(0, 0)).y, mainCam.ScreenToWorldPoint(new Vector3(0, Screen.height)).y);
-            float spawnX = Random.Range
-                (mainCam.ScreenToWorldPoint(new Vector3(0, 0)).x, mainCam.ScreenToWorldPoint(new Vector3(Screen.width, 0)).x);
-            float spawnZ = 0.1f;
-            */
-            
-            //Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width/2, Screen.height/2, Camera.main.nearClipPlane+5)); //will get the middle of the screen
-
-            Collider screen = screenCollider.GetComponentInChildren<Collider>();
-            Vector3 screenBounds = screen.bounds.size;
-            
+    {    
+            //didn't work, probably because it is a perpective camera.
             //Vector3 screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(Random.Range(0,Screen.width), Random.Range(0,Screen.height), Camera.main.farClipPlane/2));
             
             Vector3 screenPosition = new Vector3(Random.Range(-9,9), Random.Range(-5,5), 0.1f);
- 
-            float spawnZ = 0.1f;
             
-
-        Vector3 spawnPosition = new Vector3(screenPosition.x, screenPosition.y, spawnZ);
         
         return screenPosition;
-        //return spawnPosition;
-    }
-
-    void itemMovement()
-    {
-        //setup random movement direction within bounds of the screen, check 2d platformer for code inspiration
     }
 
     public void ZeroGravity()

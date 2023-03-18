@@ -3453,13 +3453,18 @@ MonoBehaviour:
   items:
   - prefab: {fileID: 683186875033557606, guid: 8adbde44e9818da44b41e177e85ed974, type: 3}
     amount: 50
+    expandable: 0
   - prefab: {fileID: 1379771525720241619, guid: 06a40e2864243fb4899aae1b121b68fb, type: 3}
     amount: 50
+    expandable: 0
   - prefab: {fileID: 10775663766855545, guid: 58795788778ff5a4db62e2b8fe4cd70c, type: 3}
     amount: 50
+    expandable: 0
   - prefab: {fileID: 4989098814792489710, guid: 7de03cf3bb8596c4e874f4a9f6da1888, type: 3}
     amount: 50
-  pooledItems: []
+    expandable: 0
+  pooledItems:
+  - {fileID: 0}
 --- !u!4 &2043799906
 Transform:
   m_ObjectHideFlags: 0
