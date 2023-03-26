@@ -9,16 +9,12 @@ public class GameManager : MonoBehaviour
     public float score;
     public float spawnInterval {get; set;}
     [SerializeField] bool continueSpawning = true;
-    
     [SerializeField] private Camera mainCam;
     [SerializeField] private GameObject newParent;
     [SerializeField] private GameObject screenCollider;
-    private int shapeID = 0;
-
     [SerializeField] public TMPro.TextMeshProUGUI scoreText;
 
     public static GameManager instance;
-
     public float forceReducer {get; set;} //value could be decreased, as a powerup
 
     //need max objects allowed to spawn per level

@@ -6,11 +6,7 @@ public class PoolItem
 {
     public GameObject prefab;
     public int amount;
-
-    public bool expandable;
 }
-
-
 
 //singleton - you create one object in memory, if anything changes it, it only changes in one spot
 
